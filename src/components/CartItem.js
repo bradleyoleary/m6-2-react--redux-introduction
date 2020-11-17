@@ -2,15 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import { x } from "react-icons-kit/feather/x";
 import { Icon } from "react-icons-kit";
+import { removeItem } from "../actions";
+import { useDispatch } from "react-redux";
 
-const CartItem = ({ title }) => {
+const CartItem = ({ title, price, id }) => {
+  const dispatch = useDispatch();
   return (
     <Container>
       <TopDiv>
         <Title>{title}</Title>
-        <CloseBtn>
+        <RemoveBtn
+          onClick={() => {
+            dispatch(removeItem({ id }));
+          }}
+        >
           <Icon icon={x} size={"100%"} style={{ color: "white" }} />
-        </CloseBtn>
+        </RemoveBtn>
       </TopDiv>
       <QtyDiv>
         Quantity: <Input />
@@ -37,7 +44,7 @@ const Title = styled.p`
   padding: 0 8px;
 `;
 
-const CloseBtn = styled.button`
+const RemoveBtn = styled.button`
   height: 35px;
   width: 35px;
   background: transparent;

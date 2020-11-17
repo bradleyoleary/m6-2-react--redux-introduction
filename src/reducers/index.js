@@ -11,6 +11,12 @@ export default function cartReducer(state = initialState, action) {
         },
       };
     }
+    case "REMOVE_ITEM": {
+      let newItems = { ...state };
+      delete newItems[action.item.id];
+
+      return newItems;
+    }
     default:
       return state;
   }
