@@ -25,7 +25,8 @@ const Wrapper = styled.div`
   position: sticky;
   background: #401f43;
   color: white;
-  height: 100%;
+  top: 0;
+  height: 100vh;
   padding: 15px 20px;
 `;
 
@@ -33,6 +34,7 @@ const Title = styled.h2``;
 
 const NumOfItems = styled.span`
   color: #dcdcdc;
+  margin-top: -10px;
 `;
 
 const TotalCostAndButton = styled.div`
