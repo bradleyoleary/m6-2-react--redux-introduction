@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { x } from "react-icons-kit/feather/x";
 import { Icon } from "react-icons-kit";
 
-const CartItem = () => {
+const CartItem = ({ title }) => {
   return (
     <Container>
       <TopDiv>
-        <Title>Hello World</Title>
+        <Title>{title}</Title>
         <CloseBtn>
           <Icon icon={x} size={"100%"} style={{ color: "white" }} />
         </CloseBtn>
