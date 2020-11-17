@@ -11,11 +11,7 @@ const CartItem = ({ title, price, id }) => {
     <Container>
       <TopDiv>
         <Title>{title}</Title>
-        <RemoveBtn
-          onClick={() => {
-            dispatch(removeItem({ id }));
-          }}
-        >
+        <RemoveBtn onClick={() => dispatch(removeItem(id))}>
           <Icon icon={x} size={"100%"} style={{ color: "white" }} />
         </RemoveBtn>
       </TopDiv>
