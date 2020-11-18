@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { x } from "react-icons-kit/feather/x";
 import { Icon } from "react-icons-kit";
-import { removeItem } from "../actions";
-import { useDispatch } from "react-redux";
+import { removeItem, updateQuantity } from "../actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const CartItem = ({ title, price, id }) => {
+const CartItem = ({ title, quantity, id }) => {
   const dispatch = useDispatch();
+  //get the current quantity of the item from the store and display qty in the input we created
+  const itemQuantity = useSelector((state) => state[id].quantity);
   return (
     <Container>
       <TopDiv>
@@ -16,7 +18,13 @@ const CartItem = ({ title, price, id }) => {
         </RemoveBtn>
       </TopDiv>
       <QtyDiv>
-        Quantity: <Input />
+        Quantity:{" "}
+        <Input
+          type="text"
+          placeholder={quantity ? quantity : 0}
+          value={itemQuantity}
+          onChange={(event) => dispatch(updateQuantity(id, event.target.value))}
+        />
       </QtyDiv>
     </Container>
   );
@@ -56,7 +64,7 @@ const QtyDiv = styled.div`
 
 const Input = styled.input`
   height: 25px;
-  width: 25px;
+  width: 30px;
   font-size: inherit;
   display: inline-block;
 `;

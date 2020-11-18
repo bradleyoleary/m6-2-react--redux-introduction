@@ -3,15 +3,21 @@ import styled from "styled-components";
 import Button from "./Button";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
-import { getStoreItemArray } from "../reducers";
+import { getStoreItemArray, getSubTotal } from "../reducers";
 
 const Cart = () => {
   const storeItems = useSelector(getStoreItemArray);
+  const subtotal = useSelector(getSubTotal);
+
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(subtotal / 100);
   //console.log(storeItems);
   return (
     <Wrapper>
-      <Title>Your Cart</Title>
-      <NumOfItems>1 Item</NumOfItems>
+      <h2>Your Cart</h2>
+      <NumOfItems>{storeItems.length} Item(s)</NumOfItems>
       {storeItems.map((item) => {
         //console.log(item);
         return (
@@ -26,7 +32,7 @@ const Cart = () => {
       })}
       <TotalCostAndButton>
         <Total>
-          Total: <strong>$12.34</strong>
+          Total: <strong>{formattedPrice}</strong>
         </Total>
         <PurchaseBtn>Purchase</PurchaseBtn>
       </TotalCostAndButton>
@@ -44,8 +50,6 @@ const Wrapper = styled.div`
   min-height: 100vh;
   padding: 15px 20px;
 `;
-
-const Title = styled.h2``;
 
 const NumOfItems = styled.span`
   color: #dcdcdc;
